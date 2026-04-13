@@ -3,33 +3,64 @@ import clsx from 'clsx';
 // Сообщаем вебпаку, что этот файл использует это изображение.
 import plane from 'src/images/plane.png';
 import { Text } from 'src/ui/text';
-
+import {
+	ArticleStateType,
+	FontFamiliesClasses,
+} from 'src/constants/articleProps';
 import styles from './Article.module.scss';
 
-export const Article = () => {
+type ArticleProps = {
+	articleState: ArticleStateType;
+};
+
+export const Article = ({ articleState }: ArticleProps) => {
+	const { fontFamilyOption } = articleState;
+
 	return (
 		<article className={clsx(styles.article)}>
-			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
+			<Text
+				as='h1'
+				size={45}
+				weight={800}
+				uppercase
+				dynamicLite
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				Портрет Западной Швейцарии
 			</Text>
 			<div className={styles.titleDescription}>
-				<Text size={22} weight={800} uppercase align='center' dynamicLite>
+				<Text
+					size={22}
+					weight={800}
+					uppercase
+					align='center'
+					dynamicLite
+					family={fontFamilyOption.className as FontFamiliesClasses}>
 					Примитивист Фиштр расписывает новый бюджетный авиалайнер
 				</Text>
 			</div>
 			<img className={styles.image} src={plane} alt='Картинка самолета' />
-			<Text dynamic size={18} fontStyle='italic'>
+			<Text
+				dynamic
+				size={18}
+				fontStyle='italic'
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				Фото: Hans-Peter Gauster , &quot;Bombardier CSeries CS300 HB-JCA&quot; ©
 				2017 CC BY-SA 2.0
 			</Text>
-			<Text dynamic size={18}>
+			<Text
+				dynamic
+				size={18}
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				В конце 2016 года швейцарская авиакомпания Swiss получила свой первый
 				канадский «Бомбардье CS300» для полётов малой и средней дальности. Чтобы
 				придать новой 145-местной машине неповторимую индивидуальность, ливрею
 				заказали живописцу. При условии, что эскиз он выполнит в одиночку и
 				лично поправит роспись, когда её будут наносить на фюзеляж.
 			</Text>
-			<Text dynamic size={18}>
+			<Text
+				dynamic
+				size={18}
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				Выбор пал на примитивиста Матиаса Форбаша, работающего под псевдонимом
 				Фиштр. Ему поставили задачу изобразить всё лучшее во франкоговорящей
 				части Швейцарии — горы, озёра, вина, сыры, доброжелательность и свободу.
@@ -37,7 +68,10 @@ export const Article = () => {
 				получился похожим на самого художника: такой же добродушный и с улыбкой
 				до ушей.
 			</Text>
-			<Text dynamic size={18}>
+			<Text
+				dynamic
+				size={18}
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				С мая 2017 года &quot;Бомбардье&quot; носит имя &quot;Швейцарская
 				Романдия&quot; и регистрационный номер HB-JCA ; совершает в среднем 4
 				коммерческих полёта в сутки. Его можно видеть в &quot;Домодедово&quot;,
