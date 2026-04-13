@@ -5,6 +5,13 @@ import clsx from 'clsx';
 import { Select } from 'src/ui/select';
 import { RadioGroup } from 'src/ui/radio-group';
 import { Separator } from 'src/ui/separator';
+import {
+	fontFamilyOptions,
+	fontColors,
+	backgroundColors,
+	contentWidthArr,
+	fontSizeOptions,
+} from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
 
@@ -28,64 +35,20 @@ export const ArticleParamsForm = () => {
 	};
 
 	const resetFormOptions = () => {
-		setFont(fontOptions[0]);
+		setFont(fontFamilyOptions[0]);
 		setFontSize(fontSizeOptions[0]);
-		setFontColor(fontColorOptions[0]);
-		setBackgroundColor(backgroundColorOptions[0]);
-		setContentWidth(contentWidthOptions[0]);
+		setFontColor(fontColors[0]);
+		setBackgroundColor(backgroundColors[0]);
+		setContentWidth(contentWidthArr[0]);
 	};
 
-	const fontOptions = [
-		{ title: 'Open Sans', value: 'Open_Sans', className: '' },
-		{ title: 'Cormorant Garamond', value: 'Cormorant_Garamond', className: '' },
-		{ title: 'Merriweather', value: 'Merriweather', className: '' },
-		{ title: 'Days One', value: 'Days_One', className: '' },
-		{ title: 'Ubuntu', value: 'Ubuntu', className: '' },
-	];
-	const [fontSelected, setFont] = useState(fontOptions[0]);
-
-	const fontSizeOptions = [
-		{ title: '18 PX', value: '18 PX', className: '' },
-		{ title: '25 PX', value: '25 PX', className: '' },
-		{ title: '38 PX', value: '38 PX', className: '' },
-	];
+	const [fontSelected, setFont] = useState(fontFamilyOptions[0]);
 	const [fontSizeSelected, setFontSize] = useState(fontSizeOptions[0]);
-
-	const fontColorOptions = [
-		{ title: 'Черный', value: 'black', className: '' },
-		{ title: 'Белый', value: 'white', className: '' },
-		{ title: 'Серый', value: 'grey', className: '' },
-		{ title: 'Розовый', value: 'pink', className: '' },
-		{ title: 'Ярко-розовый', value: 'flamingo', className: '' },
-		{ title: 'Жёлый', value: 'yellow', className: '' },
-		{ title: 'Зелёный', value: 'green', className: '' },
-		{ title: 'Голубой', value: 'blue', className: '' },
-		{ title: 'Фиолетовый', value: 'violet', className: '' },
-	];
-	const [fontColorSelected, setFontColor] = useState(fontColorOptions[0]);
-
-	const backgroundColorOptions = [
-		{ title: 'Белый', value: 'white', className: '' },
-		{ title: 'Черный', value: 'black', className: '' },
-		{ title: 'Серый', value: 'grey', className: '' },
-		{ title: 'Розовый', value: 'pink', className: '' },
-		{ title: 'Ярко-розовый', value: 'flamingo', className: '' },
-		{ title: 'Жёлый', value: 'yellow', className: '' },
-		{ title: 'Зелёный', value: 'green', className: '' },
-		{ title: 'Голубой', value: 'blue', className: '' },
-		{ title: 'Фиолетовый', value: 'violet', className: '' },
-	];
+	const [fontColorSelected, setFontColor] = useState(fontColors[0]);
 	const [backgoundColorSelected, setBackgroundColor] = useState(
-		backgroundColorOptions[0]
+		backgroundColors[0]
 	);
-
-	const contentWidthOptions = [
-		{ title: 'Широкий', value: 'wide', className: '' },
-		{ title: 'Узкий', value: 'thin', className: '' },
-	];
-	const [contentWidthSelected, setContentWidth] = useState(
-		contentWidthOptions[0]
-	);
+	const [contentWidthSelected, setContentWidth] = useState(contentWidthArr[0]);
 
 	return (
 		<>
@@ -102,7 +65,7 @@ export const ArticleParamsForm = () => {
 					<Select
 						selected={fontSelected}
 						onChange={setFont}
-						options={fontOptions}
+						options={fontFamilyOptions}
 						title='Шрифт'
 					/>
 					<RadioGroup
@@ -115,20 +78,20 @@ export const ArticleParamsForm = () => {
 					<Select
 						selected={fontColorSelected}
 						onChange={setFontColor}
-						options={fontColorOptions}
+						options={fontColors}
 						title='Цвет шрифта'
 					/>
 					<Separator />
 					<Select
 						selected={backgoundColorSelected}
 						onChange={setBackgroundColor}
-						options={fontColorOptions}
+						options={backgroundColors}
 						title='Цвет фона'
 					/>
 					<Select
 						selected={contentWidthSelected}
 						onChange={setContentWidth}
-						options={contentWidthOptions}
+						options={contentWidthArr}
 						title='Ширина контента'
 					/>
 					<div className={styles.bottomContainer}>
