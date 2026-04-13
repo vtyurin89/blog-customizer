@@ -8,50 +8,42 @@ import {
 	FontFamiliesClasses,
 } from 'src/constants/articleProps';
 import styles from './Article.module.scss';
-import { useEffect } from 'react';
 
 type ArticleProps = {
 	articleState: ArticleStateType;
 };
 
 export const Article = ({ articleState }: ArticleProps) => {
-	const {
-		fontFamilyOption,
-		fontSizeOption,
-		fontColor,
-		backgroundColor,
-		contentWidth,
-	} = articleState;
-
-	// ОТЛАДОЧНОЕ
-	useEffect(() => {
-		console.log('Article получил новые настройки:', {
-			fontFamily: fontFamilyOption,
-			fontSize: fontSizeOption,
-			fontColor: fontColor,
-			backgroundColor: backgroundColor,
-			contentWidth: contentWidth,
-		});
-	}, [
-		fontFamilyOption,
-		fontSizeOption,
-		fontColor,
-		backgroundColor,
-		contentWidth,
-	]);
+	const { fontFamilyOption } = articleState;
 
 	return (
 		<article className={clsx(styles.article)}>
-			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
+			<Text
+				as='h1'
+				size={45}
+				weight={800}
+				uppercase
+				dynamicLite
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				Портрет Западной Швейцарии
 			</Text>
 			<div className={styles.titleDescription}>
-				<Text size={22} weight={800} uppercase align='center' dynamicLite>
+				<Text
+					size={22}
+					weight={800}
+					uppercase
+					align='center'
+					dynamicLite
+					family={fontFamilyOption.className as FontFamiliesClasses}>
 					Примитивист Фиштр расписывает новый бюджетный авиалайнер
 				</Text>
 			</div>
 			<img className={styles.image} src={plane} alt='Картинка самолета' />
-			<Text dynamic size={18} fontStyle='italic'>
+			<Text
+				dynamic
+				size={18}
+				fontStyle='italic'
+				family={fontFamilyOption.className as FontFamiliesClasses}>
 				Фото: Hans-Peter Gauster , &quot;Bombardier CSeries CS300 HB-JCA&quot; ©
 				2017 CC BY-SA 2.0
 			</Text>

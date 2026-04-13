@@ -1,6 +1,6 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Select } from 'src/ui/select';
 import { RadioGroup } from 'src/ui/radio-group';
@@ -27,6 +27,8 @@ export const ArticleParamsForm = ({
 	initialValues,
 }: ArticleParamsFormProps) => {
 	const [formOpened, changeFormState] = useState(false);
+	const asideRef = useRef<HTMLElement | null>(null);
+	const arrowButtonRef = useRef<HTMLDivElement | null>(null);
 
 	const toggleForm = () => {
 		const prevStateForm = formOpened;
@@ -65,10 +67,35 @@ export const ArticleParamsForm = ({
 		setContentWidth(initialValues.contentWidth);
 	}, [initialValues]);
 
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (!formOpened) {
+				return;
+			}
+
+			const target = event.target as Node;
+			const isClickInsideForm = asideRef.current?.contains(target);
+			const isClickOnArrowButton = arrowButtonRef.current?.contains(target);
+
+			if (!isClickInsideForm && !isClickOnArrowButton) {
+				changeFormState(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [formOpened]);
+
 	return (
 		<>
-			<ArrowButton isOpen={formOpened} onClick={toggleForm} />
+			<div ref={arrowButtonRef}>
+				<ArrowButton isOpen={formOpened} onClick={toggleForm} />
+			</div>
 			<aside
+				ref={asideRef}
 				className={clsx(styles.container, {
 					[styles.container_open]: formOpened,
 				})}>
